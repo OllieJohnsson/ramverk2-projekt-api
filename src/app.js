@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const PORT = process.env.PORT || 1337;
+const PORT = process.env.PROJ_API_PORT || 1337;
 const app = express();
 
 const indexRouter = require("./routes/index");
