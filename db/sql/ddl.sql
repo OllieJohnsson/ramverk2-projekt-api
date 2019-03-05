@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS purchases (
 
 
 DELIMITER //
-DROP PROCEDURE register//
+DROP PROCEDURE IF EXISTS register//
 CREATE PROCEDURE register(
 	IN `pUsername` VARCHAR(30),
 	IN `pPassword` VARCHAR(100),
@@ -70,7 +70,7 @@ INSERT INTO `depots` (`userId`) VALUES (LAST_INSERT_ID());
 END//
 
 
-DROP PROCEDURE deposit//
+DROP PROCEDURE IF EXISTS deposit//
 CREATE PROCEDURE deposit(IN `pUserId` INT, IN `pAmount` DECIMAL(8, 2))
 BEGIN
 SET @depotId = (SELECT `id` FROM `depots` WHERE `userId` = `pUserId`);
@@ -82,7 +82,7 @@ WHERE u.id = `pUserId`;
 END//
 
 
-DROP PROCEDURE buy//
+DROP PROCEDURE IF EXISTS buy//
 CREATE PROCEDURE buy(IN `pUserId` INT, IN `pObjectId` INT, IN `pAmount` INT)
 BEGIN
 SET @depotId = (SELECT `id` FROM `depots` WHERE `userId` = `pUserId`);
@@ -95,10 +95,10 @@ DELIMITER ;
 
 
 
-CALL register("dolan", "$2b$10$Wt1h3B6ao3nKcXbLKrjUJ.L.qMmMbs6Q9EnNS2qx3F8Z6o7sgCrMa", "kalle@me.com", "Kalle", "Anka");
-CALL register("bobo", "$2b$10$Wt1h3B6ao3nKcXbLKrjUJ.L.qMmMbs6Q9EnNS2qx3F8Z6o7sgCrMa", "bobo@me.com", "Bobo", "Baba");
-CALL buy(1, 2, 1);
-CALL deposit(1, 5000);
+-- CALL register("dolan", "$2b$10$Wt1h3B6ao3nKcXbLKrjUJ.L.qMmMbs6Q9EnNS2qx3F8Z6o7sgCrMa", "kalle@me.com", "Kalle", "Anka");
+-- CALL register("bobo", "$2b$10$Wt1h3B6ao3nKcXbLKrjUJ.L.qMmMbs6Q9EnNS2qx3F8Z6o7sgCrMa", "bobo@me.com", "Bobo", "Baba");
+-- CALL buy(1, 2, 1);
+-- CALL deposit(1, 5000);
 
 -- select * from users;
 -- select * from depots;
