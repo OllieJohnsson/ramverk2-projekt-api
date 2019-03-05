@@ -19,9 +19,12 @@ function register(req, res, next) {
             return next(err);
         }
 
-        res.json({
-            message: `Grattis <b>${username}</b>! Du är nu registrerard.`
-        })
+        req.body.registerMessage = `Grattis <b>${username}</b>! Du är nu registrerard.`;
+        req.body.payload = {username: username};
+        next();
+        // res.json({
+        //     message: `Grattis <b>${username}</b>! Du är nu registrerard.`
+        // })
     })
 }
 
@@ -95,8 +98,9 @@ function checkToken(req, next) {
 function displayToken(req, res) {
     const token = req.headers["x-access-token"];
     const username = req.body.username;
+    const registerMessage = req.body.registerMessage;
     res.json({
-        message: `Successfully logged in ${username}`,
+        message: registerMessage || `Loggade in <b>${username}</b>`,
         token
     });
 }
