@@ -1,0 +1,29 @@
+{
+  "name": "ramverk2-projekt-api",
+  "version": "1.0.0",
+  "description": "API for ramverk2 project",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "export NODE_ENV='development' && nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OllieJohnsson/ramverk2-projekt-api.git"
+  },
+  "author": "Oliver Johnsson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OllieJohnsson/ramverk2-projekt-api/issues"
+  },
+  "homepage": "https://github.com/OllieJohnsson/ramverk2-projekt-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "mysql": "^2.16.0",
+    "sqlite3": "^4.0.6"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
