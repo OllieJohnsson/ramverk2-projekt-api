@@ -114,7 +114,11 @@ function displayToken(req, res) {
     });
 }
 
-
+function getUsers(req, res, next) {
+    db.query("select * from users", (err, rows) => {
+        res.json(rows);
+    })
+}
 
 module.exports = {
     register,
@@ -122,5 +126,6 @@ module.exports = {
     checkPassword,
     getToken,
     checkToken,
-    displayToken
+    displayToken,
+    getUsers
 }

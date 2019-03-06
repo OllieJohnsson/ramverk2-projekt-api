@@ -66,7 +66,7 @@ function depot(req, res, next) {
         if (err) {
             return next(err);
         }
-        res.json(rows[0]);
+        res.json(rows[0][0]);
     })
 }
 

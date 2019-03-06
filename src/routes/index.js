@@ -28,5 +28,7 @@ router.get("/objects",
     (req, res, next) => objects.getAll(req, res, next)
 );
 
+router.get("/users", (req, res, next) => auth.getUsers(req, res, next));
+
 
 module.exports = router;
