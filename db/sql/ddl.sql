@@ -87,10 +87,17 @@ CREATE PROCEDURE buy(IN `pUserId` INT, IN `pObjectId` INT, IN `pAmount` INT)
 BEGIN
 SET @depotId = (SELECT `id` FROM `depots` WHERE `userId` = `pUserId`);
 SET @totalValue = (`pAmount`*(SELECT `price` FROM `objects` WHERE `id` = `pObjectId`));
-INSERT INTO purchases (`depotId`, `objectId`, `amount`) VALUES (@depotId, `pObjectId`, `pAmount`);
-UPDATE objects SET `stock` = `stock` - `pAmount` WHERE `id` = `pObjectId`;
-UPDATE depots SET `balance` = (`balance` - @totalValue) WHERE `id` = @depotId;
-SELECT `name`, @totalValue AS totalValue FROM `objects` WHERE `id` = `pObjectId`;
+SET @balance = (SELECT `balance` FROM `depots` WHERE `id` = @depotId);
+
+IF @totalValue > @balance THEN
+   SELECT "Du har för lite pengar på ditt konto." AS `error`;
+ELSE
+	INSERT INTO purchases (`depotId`, `objectId`, `amount`) VALUES (@depotId, `pObjectId`, `pAmount`);
+	UPDATE objects SET `stock` = `stock` - `pAmount` WHERE `id` = `pObjectId`;
+	UPDATE depots SET `balance` = (`balance` - @totalValue) WHERE `id` = @depotId;
+	SELECT `name`, @totalValue AS totalValue FROM `objects` WHERE `id` = `pObjectId`;
+END IF;
+
 END//
 
 DROP PROCEDURE IF EXISTS depot//

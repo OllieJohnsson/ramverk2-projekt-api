@@ -23,7 +23,10 @@ router.get("/checkToken",
     (req, res, next) => auth.displayToken(req, res)
 );
 
-router.get("/objects", (req, res, next) => objects.getAll(req, res, next));
+router.get("/objects",
+    (req, res, next) => auth.checkToken(req, next),
+    (req, res, next) => objects.getAll(req, res, next)
+);
 
 
 module.exports = router;

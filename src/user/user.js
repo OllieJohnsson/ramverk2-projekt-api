@@ -47,6 +47,11 @@ function buy(req, res, next) {
         if (err) {
             return next(err);
         }
+        if (rows[0][0].error) {
+            return next({
+                message: rows[0][0].error
+            });
+        }
         res.json({
             message: `Köp lyckades! Du har köpt ${amount} enheter av ${rows[0][0].name} till ett värde av ${rows[0][0].totalValue}kr.`
         })
