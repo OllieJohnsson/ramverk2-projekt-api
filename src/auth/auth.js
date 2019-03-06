@@ -16,6 +16,14 @@ function register(req, res, next) {
     const sql = "CALL register(?, ?, ?, ?, ?)"
     db.query(sql, [username, hashedPassword, email, firstName, lastName], (err, rows) => {
         if (err) {
+            switch (err.sqlMessage) {
+                case `Duplicate entry \'${username}\' for key \'username\'`:
+                    err.message = `Användaren <b>${username}</b> är redan registrerad.`
+                    break;
+                case `Duplicate entry \'${email}\' for key \'email\'`:
+                    err.message = `En användare med e-postadressen <b>${email}</b> är redan registrerad.`
+                    break;
+            }
             return next(err);
         }
 
@@ -40,7 +48,7 @@ function getHashFromUsername(req, next) {
             return next({
                 status: 401,
                 title: "Unknown username",
-                message: `A user with the username ${username} is not in the database`
+                message: `Användaren <b>${username}</b> är inte registrerad än.`
             });
         }
         req.body.hash = rows[0].password;
@@ -59,7 +67,7 @@ function checkPassword(req, next) {
             return next({
                 status: 401,
                 title: "Unauthorized",
-                message: "You typed in the wrong username or password"
+                message: "Fel användare eller lösenord."
             });
         }
         req.body.payload = { username };
@@ -104,8 +112,6 @@ function displayToken(req, res) {
         token
     });
 }
-
-
 
 
 
