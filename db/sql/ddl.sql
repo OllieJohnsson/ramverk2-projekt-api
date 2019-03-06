@@ -86,10 +86,21 @@ DROP PROCEDURE IF EXISTS buy//
 CREATE PROCEDURE buy(IN `pUserId` INT, IN `pObjectId` INT, IN `pAmount` INT)
 BEGIN
 SET @depotId = (SELECT `id` FROM `depots` WHERE `userId` = `pUserId`);
+SET @totalValue = (`pAmount`*(SELECT `price` FROM `objects` WHERE `id` = `pObjectId`));
 INSERT INTO purchases (`depotId`, `objectId`, `amount`) VALUES (@depotId, `pObjectId`, `pAmount`);
 UPDATE objects SET `stock` = `stock` - `pAmount` WHERE `id` = `pObjectId`;
-UPDATE depots SET `balance` = `balance` - (`pAmount`*(SELECT `price` FROM `objects` WHERE `id` = `pObjectId`)) WHERE `id` = @depotId;
+UPDATE depots SET `balance` = (`balance` - @totalValue) WHERE `id` = @depotId;
+SELECT `name`, @totalValue AS totalValue FROM `objects` WHERE `id` = `pObjectId`;
 END//
+
+DROP PROCEDURE IF EXISTS depot//
+CREATE PROCEDURE depot(`pUserId` INT)
+BEGIN
+SELECT d.balance, u.username FROM `depots` d
+JOIN `users` AS u ON u.id = `pUserId`
+WHERE d.`userId` = `pUserId`;
+END//
+
 
 DELIMITER ;
 

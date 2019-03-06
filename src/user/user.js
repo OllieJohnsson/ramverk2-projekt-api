@@ -47,9 +47,8 @@ function buy(req, res, next) {
         if (err) {
             return next(err);
         }
-
         res.json({
-            message: `Köp lyckades! Du har köpt ${amount} av ${rows[0][0].name}.`
+            message: `Köp lyckades! Du har köpt ${amount} enheter av ${rows[0][0].name} till ett värde av ${rows[0][0].totalValue}kr.`
         })
     })
 }
@@ -57,7 +56,7 @@ function buy(req, res, next) {
 
 function depot(req, res, next) {
     const userId = req.body.userId;
-    const sql = "SELECT * FROM depots WHERE userId = ?";
+    const sql = "CALL depot(?)";
     db.query(sql, userId, (err, rows) => {
         if (err) {
             return next(err);
