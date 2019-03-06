@@ -30,9 +30,6 @@ function register(req, res, next) {
         req.body.registerMessage = `Grattis <b>${username}</b>! Du är nu registrerard.`;
         req.body.payload = {username: username};
         next();
-        // res.json({
-        //     message: `Grattis <b>${username}</b>! Du är nu registrerard.`
-        // })
     })
 }
 
@@ -42,7 +39,7 @@ function register(req, res, next) {
 
 function getHashFromUsername(req, next) {
     const username = req.body.username;
-    const sql = "SELECT password FROM users WHERE username = ?";
+    const sql = "SELECT password, id FROM users WHERE username = ?";
     db.query(sql, username, (err, rows) => {
         if (rows.length < 1) {
             return next({
@@ -52,6 +49,7 @@ function getHashFromUsername(req, next) {
             });
         }
         req.body.hash = rows[0].password;
+        req.body.userId = rows[0].id;
         next();
     });
 }
@@ -106,10 +104,13 @@ function checkToken(req, next) {
 function displayToken(req, res) {
     const token = req.headers["x-access-token"];
     const username = req.body.username;
+    const userId = req.body.userId;
     const registerMessage = req.body.registerMessage;
+
     res.json({
         message: registerMessage || `Loggade in <b>${username}</b>`,
-        token
+        token,
+        userId
     });
 }
 

@@ -55,7 +55,20 @@ function buy(req, res, next) {
 }
 
 
+function depot(req, res, next) {
+    const userId = req.body.userId;
+    const sql = "SELECT * FROM depots WHERE userId = ?";
+    db.query(sql, userId, (err, rows) => {
+        if (err) {
+            return next(err);
+        }
+        res.json(rows);
+    })
+}
+
+
 module.exports = {
     deposit,
-    buy
+    buy,
+    depot
 }
