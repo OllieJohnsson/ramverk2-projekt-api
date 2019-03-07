@@ -71,8 +71,23 @@ function depot(req, res, next) {
 }
 
 
+function boughtObjects(req, res, next) {
+    const userId = req.body.userId;
+    const sql = "CALL boughtObjects(?)";
+    db.query(sql, userId, (err, rows) => {
+        if (err) {
+            return next(err);
+        }
+        res.json(rows[0]);
+    })
+}
+
+
+
+
 module.exports = {
     deposit,
     buy,
-    depot
+    depot,
+    boughtObjects
 }

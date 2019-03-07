@@ -19,6 +19,11 @@ router.post("/user/depot",
     (req, res, next) => user.depot(req, res, next)
 );
 
+router.post("/user/boughtObjects",
+    (req, res, next) => auth.checkToken(req, next),
+    (req, res, next) => user.boughtObjects(req, res, next)
+);
+
 
 
 

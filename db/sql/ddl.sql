@@ -108,6 +108,16 @@ JOIN `users` AS u ON u.id = `pUserId`
 WHERE d.`userId` = `pUserId`;
 END//
 
+DROP PROCEDURE IF EXISTS boughtObjects//
+CREATE PROCEDURE boughtObjects(`pUserId` INT)
+BEGIN
+SET @depotId = (SELECT id from `depots` WHERE `userId` = `pUserId`);
+SELECT p.objectId, SUM(p.amount) AS amount, o.name, SUM(o.price * p.amount) AS value FROM `purchases` p
+JOIN `objects` AS o ON o.id = p.objectId
+WHERE p.depotId = @depotId
+GROUP BY `objectId`;
+END//
+
 
 DELIMITER ;
 
