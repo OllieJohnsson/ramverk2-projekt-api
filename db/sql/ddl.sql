@@ -89,9 +89,12 @@ BEGIN
 SET @depotId = (SELECT `id` FROM `depots` WHERE `userId` = `pUserId`);
 SET @totalValue = (`pAmount`*(SELECT `price` FROM `objects` WHERE `id` = `pObjectId`));
 SET @balance = (SELECT `balance` FROM `depots` WHERE `id` = @depotId);
+SET @availableObjects = (SELECT `stock` FROM `objects` WHERE `id` = `pObjectId`);
 
 IF @totalValue > @balance THEN
    SELECT "Du har för lite pengar på ditt konto." AS `error`;
+ELSEIF `pAmount` > @availableObjects THEN
+	SELECT "Det finns inte så många objekt tillgängligt." AS `error`;
 ELSE
 	INSERT INTO purchases (`depotId`, `objectId`, `amount`) VALUES (@depotId, `pObjectId`, `pAmount`);
 	UPDATE objects SET `stock` = `stock` - `pAmount` WHERE `id` = `pObjectId`;
