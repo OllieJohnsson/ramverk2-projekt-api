@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS purchases (
 	`amount` INT,
 	`depotId` INT,
 	`objectId` INT,
+	`date` DATETIME DEFAULT NOW(),
 
 	PRIMARY KEY(`id`),
 	FOREIGN KEY(`depotId`) REFERENCES `depots`(`id`),
@@ -97,7 +98,6 @@ ELSE
 	UPDATE depots SET `balance` = (`balance` - @totalValue) WHERE `id` = @depotId;
 	SELECT `name`, @totalValue AS totalValue FROM `objects` WHERE `id` = `pObjectId`;
 END IF;
-
 END//
 
 DROP PROCEDURE IF EXISTS depot//
@@ -112,10 +112,28 @@ DROP PROCEDURE IF EXISTS boughtObjects//
 CREATE PROCEDURE boughtObjects(`pUserId` INT)
 BEGIN
 SET @depotId = (SELECT id from `depots` WHERE `userId` = `pUserId`);
-SELECT p.objectId, SUM(p.amount) AS amount, o.name, SUM(o.price * p.amount) AS value FROM `purchases` p
+SELECT p.objectId AS id, SUM(p.amount) AS amount, o.name, SUM(o.price * p.amount) AS value FROM `purchases` p
 JOIN `objects` AS o ON o.id = p.objectId
 WHERE p.depotId = @depotId
 GROUP BY `objectId`;
+END//
+
+
+DROP PROCEDURE IF EXISTS sell//
+CREATE PROCEDURE sell(IN `pUserId` INT, IN `pObjectId` INT, IN `pAmount` INT)
+BEGIN
+SET @depotId = (SELECT `id` FROM `depots` WHERE `userId` = `pUserId`);
+SET @myAmount = (SELECT SUM(p.amount) FROM `purchases` p WHERE `depotId` = @depotId AND `objectId` = `pObjectId` GROUP BY `objectId`);
+SET @totalValue = (`pAmount`*(SELECT `price` FROM `objects` WHERE `id` = `pObjectId`));
+
+IF `pAmount` > @myAmount OR @myAmount IS NULL THEN
+   SELECT "Du har inte så många objekt att sälja" AS `error`;
+ELSE
+	INSERT INTO purchases (`depotId`, `objectId`, `amount`) VALUES (@depotId, `pObjectId`, -`pAmount`);
+	UPDATE objects SET `stock` = `stock` + `pAmount` WHERE `id` = `pObjectId`;
+	UPDATE depots SET `balance` = (`balance` + @totalValue) WHERE `id` = @depotId;
+	SELECT `name`, @totalValue AS totalValue FROM `objects` WHERE `id` = `pObjectId`;
+END IF;
 END//
 
 
