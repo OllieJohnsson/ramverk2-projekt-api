@@ -83,11 +83,32 @@ function boughtObjects(req, res, next) {
 }
 
 
+function sell(req, res, next) {
+    const userId = req.body.userId;
+    const objectId = req.body.objectId;
+    const amount = req.body.amount;
+
+    const sql = "CALL sell(?, ?, ?)";
+    db.query(sql, [userId, objectId, amount], (err, rows) => {
+        if (err) {
+            return next(err);
+        }
+        if (rows[0][0].error) {
+            return next({
+                message: rows[0][0].error
+            });
+        }
+        res.json({
+            message: `Försäljning lyckades! Du har sålt ${amount} enheter av ${rows[0][0].name} till ett värde av ${rows[0][0].totalValue}kr.`
+        })
+    })
+}
 
 
 module.exports = {
     deposit,
     buy,
     depot,
-    boughtObjects
+    boughtObjects,
+    sell
 }

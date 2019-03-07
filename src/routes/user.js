@@ -14,6 +14,11 @@ router.post("/user/buy",
     (req, res, next) => user.buy(req, res, next)
 );
 
+router.post("/user/sell",
+    (req, res, next) => auth.checkToken(req, next),
+    (req, res, next) => user.sell(req, res, next)
+);
+
 router.post("/user/depot",
     (req, res, next) => auth.checkToken(req, next),
     (req, res, next) => user.depot(req, res, next)
