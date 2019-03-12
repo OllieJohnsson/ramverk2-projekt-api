@@ -141,6 +141,17 @@ END IF;
 END//
 
 
+
+DROP PROCEDURE IF EXISTS updatePrice//
+CREATE PROCEDURE updatePrice(`pObjectId` INT, `pPrice` INT)
+BEGIN
+
+UPDATE objects SET `price` = `pPrice` WHERE `id` = `pObjectId`;
+
+END//
+
+
+
 DELIMITER ;
 
 

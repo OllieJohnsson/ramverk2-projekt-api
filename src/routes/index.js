@@ -30,5 +30,7 @@ router.get("/objects",
 
 router.get("/users", (req, res, next) => auth.getUsers(req, res, next));
 
+router.put("/updatePrice", (req, res, next) => objects.updatePrice(req, res, next));
+
 
 module.exports = router;
