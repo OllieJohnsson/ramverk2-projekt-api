@@ -20,7 +20,7 @@ function getAll(req, res, next) {
 function updatePrice(req, res, next) {
     const objectId = req.body.objectId;
     const price = req.body.price;
-    const sql = "call(updatePrice(?, ?))";
+    const sql = "CALL updatePrice(?, ?)";
 
     db.query(sql, [objectId, price], (err, rows) => {
         if (err) {
