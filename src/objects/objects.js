@@ -26,8 +26,8 @@ function updatePrice(req, res, next) {
         if (err) {
             return next(err);
         }
-
         console.log(`Updated price!`);
+        res.end("Updated price!");
     })
 }
 
