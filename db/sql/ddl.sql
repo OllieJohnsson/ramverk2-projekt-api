@@ -21,6 +21,8 @@ CREATE TABLE IF NOT EXISTS objects (
 	`name` VARCHAR(30) UNIQUE NOT NULL,
 	`price` DECIMAL(8, 2) NOT NULL,
 	`stock` INT DEFAULT 0,
+	`rate` DECIMAL(4, 3),
+	`variance` DECIMAL(2, 1),
 
 	PRIMARY KEY(`id`)
 );
