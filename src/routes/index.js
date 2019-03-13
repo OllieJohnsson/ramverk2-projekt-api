@@ -24,7 +24,6 @@ router.get("/checkToken",
 );
 
 router.get("/objects",
-    // (req, res, next) => auth.checkToken(req, next),
     (req, res, next) => objects.getAll(req, res, next)
 );
 
