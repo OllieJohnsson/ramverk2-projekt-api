@@ -149,6 +149,7 @@ CREATE PROCEDURE updatePrice(`pObjectId` INT, `pPrice` INT)
 BEGIN
 
 UPDATE objects SET `price` = `pPrice` WHERE `id` = `pObjectId`;
+SELECT * FROM `objects` WHERE `id` = `pObjectId`;
 
 END//
 
