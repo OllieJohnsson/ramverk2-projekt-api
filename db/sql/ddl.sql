@@ -145,7 +145,7 @@ END//
 
 
 DROP PROCEDURE IF EXISTS updatePrice//
-CREATE PROCEDURE updatePrice(`pObjectId` INT, `pPrice` INT)
+CREATE PROCEDURE updatePrice(`pObjectId` INT, `pPrice` DECIMAL(8, 2))
 BEGIN
 
 UPDATE objects SET `price` = `pPrice` WHERE `id` = `pObjectId`;
