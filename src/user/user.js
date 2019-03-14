@@ -60,7 +60,7 @@ function buy(req, res, next) {
 
 
 function depot(req, res, next) {
-    const userId = req.body.userId;
+    const userId = req.params.userId;
     const sql = "CALL depot(?)";
     db.query(sql, userId, (err, rows) => {
         if (err) {
@@ -72,7 +72,7 @@ function depot(req, res, next) {
 
 
 function boughtObjects(req, res, next) {
-    const userId = req.body.userId;
+    const userId = req.params.userId;
     const sql = "CALL boughtObjects(?)";
     db.query(sql, userId, (err, rows) => {
         if (err) {

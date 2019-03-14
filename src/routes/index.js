@@ -18,10 +18,10 @@ router.post("/login",
     (req, res, next) => auth.displayToken(req, res)
 );
 
-router.get("/checkToken",
-    (req, res, next) => auth.checkToken(req, next),
-    (req, res, next) => auth.displayToken(req, res)
-);
+// router.get("/checkToken",
+//     (req, res, next) => auth.checkToken(req, next),
+//     (req, res, next) => auth.displayToken(req, res)
+// );
 
 router.get("/objects",
     (req, res, next) => objects.getAll(req, res, next)

@@ -19,12 +19,12 @@ router.post("/user/sell",
     (req, res, next) => user.sell(req, res, next)
 );
 
-router.post("/user/depot",
+router.get("/user/depot/:userId",
     (req, res, next) => auth.checkToken(req, next),
     (req, res, next) => user.depot(req, res, next)
 );
 
-router.post("/user/boughtObjects",
+router.get("/user/boughtObjects/:userId",
     (req, res, next) => auth.checkToken(req, next),
     (req, res, next) => user.boughtObjects(req, res, next)
 );
