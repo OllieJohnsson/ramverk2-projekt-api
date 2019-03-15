@@ -5,7 +5,8 @@
   "main": "src/app.js",
   "scripts": {
     "start": "export NODE_ENV='development' && nodemon src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deployDB": "rsync -av ./db/sql oliver@debian:~/git/ramverk2-projekt-api/db/"
   },
   "repository": {
     "type": "git",
