@@ -26,29 +26,17 @@ function updatePrice(req, res, next) {
         if (err) {
             return next(err);
         }
-        res.json(rows[0][0]);
+        res.json({
+            data: rows[0][0],
+            history: rows[1]
+        });
     })
 }
 
 
 
-// function priceHistory(req, res, next) {
-//     const id = req.params.id;
-//     const sql = "CALL priceHistory(?)";
-//
-//     db.query(sql, id, (err, rows) => {
-//         if (err) {
-//             return next(err);
-//         }
-//
-//         res.json(rows[0]);
-//     });
-//
-// }
-
 
 module.exports = {
     getAll,
-    updatePrice,
-    // priceHistory
+    updatePrice
 }

@@ -26,7 +26,6 @@ router.get("/objects",
 router.get("/users", (req, res, next) => auth.getUsers(req, res, next));
 
 router.put("/updatePrice", (req, res, next) => objects.updatePrice(req, res, next));
-// router.get("/priceHistory/:id", (req, res, next) => objects.priceHistory(req, res, next));
 
 
 module.exports = router;
