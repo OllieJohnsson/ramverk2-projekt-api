@@ -18,10 +18,6 @@ router.post("/login",
     (req, res, next) => auth.displayToken(req, res)
 );
 
-// router.get("/checkToken",
-//     (req, res, next) => auth.checkToken(req, next),
-//     (req, res, next) => auth.displayToken(req, res)
-// );
 
 router.get("/objects",
     (req, res, next) => objects.getAll(req, res, next)
@@ -30,6 +26,7 @@ router.get("/objects",
 router.get("/users", (req, res, next) => auth.getUsers(req, res, next));
 
 router.put("/updatePrice", (req, res, next) => objects.updatePrice(req, res, next));
+router.get("/priceHistory/:id", (req, res, next) => objects.priceHistory(req, res, next));
 
 
 module.exports = router;

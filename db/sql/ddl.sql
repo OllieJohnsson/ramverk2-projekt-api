@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS purchases;
 DROP TABLE IF EXISTS depots;
+DROP TABLE IF EXISTS priceHistory;
 DROP TABLE IF EXISTS objects;
 DROP TABLE IF EXISTS users;
 
@@ -25,6 +26,15 @@ CREATE TABLE IF NOT EXISTS objects (
 	`variance` DECIMAL(2, 1),
 
 	PRIMARY KEY(`id`)
+);
+
+CREATE TABLE IF NOT EXISTS priceHistory (
+	`objectId` INT NOT NULL,
+	`price` DECIMAL(8, 2) NOT NULL,
+	`date` DATETIME DEFAULT NOW(),
+
+	PRIMARY KEY(`objectId`, `date`),
+	FOREIGN KEY(`objectId`) REFERENCES `objects`(`id`)
 );
 
 
@@ -147,10 +157,18 @@ END//
 DROP PROCEDURE IF EXISTS updatePrice//
 CREATE PROCEDURE updatePrice(`pObjectId` INT, `pPrice` DECIMAL(8, 2))
 BEGIN
-
 UPDATE objects SET `price` = `pPrice` WHERE `id` = `pObjectId`;
+INSERT INTO `priceHistory` (`objectId`, `price`) VALUES (`pObjectId`, `pPrice`);
+DELETE FROM `priceHistory` where `date` < DATE_SUB(NOW() , INTERVAL 1 MINUTE);
 SELECT * FROM `objects` WHERE `id` = `pObjectId`;
 
+END//
+
+
+DROP PROCEDURE IF EXISTS priceHistory//
+CREATE PROCEDURE priceHistory(`pObjectId` INT)
+BEGIN
+SELECT * FROM `priceHistory` WHERE `objectId` = `pObjectId`;
 END//
 
 
