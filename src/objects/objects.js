@@ -26,10 +26,10 @@ function updatePrice(req, res, next) {
         if (err) {
             return next(err);
         }
-        res.json({
-            data: rows[0][0],
-            history: rows[1]
-        });
+
+        let object = rows[0][0];
+        object["history"] = rows[1];
+        res.json(object);
     })
 }
 
