@@ -153,6 +153,12 @@ END IF;
 END//
 
 
+DROP PROCEDURE IF EXISTS priceHistory//
+CREATE PROCEDURE priceHistory(`pObjectId` INT)
+BEGIN
+SELECT * FROM `priceHistory` WHERE `objectId` = `pObjectId`;
+END//
+
 
 DROP PROCEDURE IF EXISTS updatePrice//
 CREATE PROCEDURE updatePrice(`pObjectId` INT, `pPrice` DECIMAL(8, 2))

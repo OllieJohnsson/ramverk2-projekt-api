@@ -4,14 +4,24 @@ const db = require("../../db/connection");
 
 function getAll(req, res, next) {
     const sql = "SELECT * FROM objects";
-    db.query(sql, (err, rows) => {
+    db.query(sql, async (err, rows) => {
         if (err) {
             return next(err);
         }
 
-        res.json({
-            data: rows
+        const withHistory = rows.map(async object => {
+            const sql = "CALL priceHistory(?)";
+            return new Promise((resolve) => {
+                db.query(sql, object.id, async (err, rows) => {
+                    object["history"] = rows[0];
+                    resolve(object);
+                })
+            })
         });
+
+        Promise.all(withHistory).then(objects => {
+            res.json(objects)
+        })
     });
 }
 
