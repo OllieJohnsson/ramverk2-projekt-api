@@ -161,13 +161,6 @@ UPDATE objects SET `price` = `pPrice` WHERE `id` = `pObjectId`;
 INSERT INTO `priceHistory` (`objectId`, `price`) VALUES (`pObjectId`, `pPrice`);
 DELETE FROM `priceHistory` where `date` < DATE_SUB(NOW() , INTERVAL 1 MINUTE);
 SELECT * FROM `objects` WHERE `id` = `pObjectId`;
-
-END//
-
-
-DROP PROCEDURE IF EXISTS priceHistory//
-CREATE PROCEDURE priceHistory(`pObjectId` INT)
-BEGIN
 SELECT * FROM `priceHistory` WHERE `objectId` = `pObjectId`;
 END//
 
