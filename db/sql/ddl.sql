@@ -159,7 +159,7 @@ CREATE PROCEDURE updatePrice(`pObjectId` INT, `pPrice` DECIMAL(8, 2))
 BEGIN
 UPDATE objects SET `price` = `pPrice` WHERE `id` = `pObjectId`;
 INSERT INTO `priceHistory` (`objectId`, `price`) VALUES (`pObjectId`, `pPrice`);
-DELETE FROM `priceHistory` where `date` < DATE_SUB(NOW() , INTERVAL 1 MINUTE);
+DELETE FROM `priceHistory` where `date` < DATE_SUB(NOW() , INTERVAL 1 HOUR);
 SELECT * FROM `objects` WHERE `id` = `pObjectId`;
 SELECT * FROM `priceHistory` WHERE `objectId` = `pObjectId`;
 END//
@@ -167,15 +167,3 @@ END//
 
 
 DELIMITER ;
-
-
-
--- CALL register("dolan", "$2b$10$Wt1h3B6ao3nKcXbLKrjUJ.L.qMmMbs6Q9EnNS2qx3F8Z6o7sgCrMa", "kalle@me.com", "Kalle", "Anka");
--- CALL register("bobo", "$2b$10$Wt1h3B6ao3nKcXbLKrjUJ.L.qMmMbs6Q9EnNS2qx3F8Z6o7sgCrMa", "bobo@me.com", "Bobo", "Baba");
--- CALL buy(1, 2, 1);
--- CALL deposit(1, 5000);
-
--- select * from users;
--- select * from depots;
--- select * FROM objects;
--- select * from purchases;
