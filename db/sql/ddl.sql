@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS objects (
 	`id` INT AUTO_INCREMENT,
 	`name` VARCHAR(30) UNIQUE NOT NULL,
-	`icon` VARCHAR(2),
+	`icon` VARCHAR(7),
 	`price` DECIMAL(8, 2) NOT NULL,
 	`stock` INT DEFAULT 0,
 	`rate` DECIMAL(4, 3),
