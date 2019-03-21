@@ -1,7 +1,6 @@
 const db = require("../../db/connection");
 
 
-
 function getAll(req, res, next) {
     const sql = "SELECT * FROM objects";
     db.query(sql, async (err, rows) => {

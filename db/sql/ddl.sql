@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS objects (
 	`variance` DECIMAL(2, 1),
 
 	PRIMARY KEY(`id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
 CREATE TABLE IF NOT EXISTS priceHistory (
 	`objectId` INT NOT NULL,
@@ -165,7 +165,7 @@ CREATE PROCEDURE updatePrice(`pObjectId` INT, `pPrice` DECIMAL(8, 2))
 BEGIN
 UPDATE objects SET `price` = `pPrice` WHERE `id` = `pObjectId`;
 INSERT INTO `priceHistory` (`objectId`, `price`) VALUES (`pObjectId`, `pPrice`);
-DELETE FROM `priceHistory` where `date` < DATE_SUB(NOW() , INTERVAL 1 HOUR);
+DELETE FROM `priceHistory` where `date` < DATE_SUB(NOW() , INTERVAL 2 HOUR);
 SELECT * FROM `objects` WHERE `id` = `pObjectId`;
 SELECT * FROM `priceHistory` WHERE `objectId` = `pObjectId`;
 END//
