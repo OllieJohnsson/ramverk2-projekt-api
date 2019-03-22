@@ -18,16 +18,16 @@ function register(req, res, next) {
         if (err) {
             switch (err.sqlMessage) {
                 case `Duplicate entry \'${username}\' for key \'username\'`:
-                    err.message = `Användaren <b>${username}</b> är redan registrerad.`
+                    err.message = `Användaren ${username} är redan registrerad.`
                     break;
                 case `Duplicate entry \'${email}\' for key \'email\'`:
-                    err.message = `En användare med e-postadressen <b>${email}</b> är redan registrerad.`
+                    err.message = `En användare med e-postadressen ${email} är redan registrerad.`
                     break;
             }
             return next(err);
         }
 
-        req.body.registerMessage = `Grattis <b>${username}</b>! Du är nu registrerard.`;
+        req.body.registerMessage = `Grattis ${username}! Du är nu registrerard.`;
         req.body.payload = {username: username};
         next();
     })
@@ -45,7 +45,7 @@ function getHashFromUsername(req, next) {
             return next({
                 status: 401,
                 title: "Unknown username",
-                message: `Användaren <b>${username}</b> är inte registrerad än.`
+                message: `Användaren ${username} är inte registrerad än.`
             });
         }
         req.body.hash = rows[0].password;
@@ -108,7 +108,7 @@ function displayToken(req, res) {
     const registerMessage = req.body.registerMessage;
 
     res.json({
-        message: registerMessage || `Loggade in <b>${username}</b>`,
+        message: registerMessage || `Loggade in ${username}`,
         token,
         userId
     });

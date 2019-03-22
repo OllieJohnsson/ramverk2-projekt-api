@@ -31,3 +31,6 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
     console.log(`API is listening to port ${PORT}`);
 })
+
+
+module.exports = app;
