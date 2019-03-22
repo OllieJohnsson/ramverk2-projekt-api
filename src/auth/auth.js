@@ -28,7 +28,7 @@ function register(req, res, next) {
         }
 
         req.body.registerMessage = `Grattis ${username}! Du är nu registrerard.`;
-        req.body.payload = {username: username};
+        req.body.payload = {username};
         next();
     })
 }
@@ -107,7 +107,7 @@ function displayToken(req, res) {
     const userId = req.body.userId;
     const registerMessage = req.body.registerMessage;
 
-    res.json({
+    res.status(200).json({
         message: registerMessage || `Loggade in ${username}`,
         token,
         userId
@@ -128,4 +128,4 @@ module.exports = {
     checkToken,
     displayToken,
     getUsers
-}
+};

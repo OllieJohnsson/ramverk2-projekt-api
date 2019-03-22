@@ -8,7 +8,7 @@ function getAll(req, res, next) {
             return next(err);
         }
 
-        const withHistory = rows.map(async object => {
+        const withHistory = rows.map(async (object) => {
             const sql = "CALL priceHistory(?)";
             return new Promise((resolve) => {
                 db.query(sql, object.id, async (err, rows) => {
@@ -18,8 +18,8 @@ function getAll(req, res, next) {
             })
         });
 
-        Promise.all(withHistory).then(objects => {
-            res.json(objects)
+        Promise.all(withHistory).then((objects) => {
+            res.json(objects);
         })
     });
 }
@@ -32,14 +32,14 @@ function updatePrice(req, res, next) {
     const sql = "CALL updatePrice(?, ?)";
 
     db.query(sql, [objectId, price], (err, rows) => {
-        if (err) {
+        if (err) {
             return next(err);
         }
 
         let object = rows[0][0];
         object["history"] = rows[1];
         res.json(object);
-    })
+    });
 }
 
 
@@ -48,4 +48,4 @@ function updatePrice(req, res, next) {
 module.exports = {
     getAll,
     updatePrice
-}
+};

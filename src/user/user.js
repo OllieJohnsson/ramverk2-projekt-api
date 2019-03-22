@@ -101,7 +101,7 @@ function sell(req, res, next) {
         res.json({
             message: `Försäljning lyckades! Du har sålt ${amount} enheter av ${rows[0][0].name} till ett värde av ${rows[0][0].totalValue}kr.`
         })
-    })
+    });
 }
 
 
@@ -111,4 +111,4 @@ module.exports = {
     depot,
     boughtObjects,
     sell
-}
+};
