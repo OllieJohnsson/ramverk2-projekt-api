@@ -10,6 +10,12 @@ git:
 before_script:
     - npm install
 
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS rv2projTest;'
+  - mysql -e 'GRANT ALL ON rv2projTest.* to "travis"@"localhost";'
+  - mysql -utravis rv2projTest < db/sql/ddl.sql
+  - mysql -utravis rv2projTest < db/sql/insert.sql
+
 script:
     - npm test
 
