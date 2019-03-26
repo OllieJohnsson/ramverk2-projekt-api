@@ -12,7 +12,7 @@ API för projektet i kursen ramverk2.
 <!-- Gör ett medvetet val av teknik och berätta utförligt i din README om vilka teknikval du har gjort och varför. -->
 
 
-För routingen av mitt API valde jag att använda **Express**. Det är ett ramverk jag använt tidigare och verkar vara det överlägset populäraste. För att autensiera användare valde jag **jsonwebtoken**. Om rätt uppgifter anges och rätt env-variabel är satt returneras en token i form av en sträng. Användarnas lösenord krypteras med hjälp av **bcrypt** för att öka säkerheten ytterligare. Databasen valde jag att skapa i **MYSQL**. Jag kände att jag hade större kontroll där jämfört med **MONGODB**. MYSQL är bland annat striktare när det kommer till tabellers innehåll och har relationer mellan tabeller så man slipper duplicera data. För att hålla min javascript-kod renare och mer lättläst, skapade jag en del procedures i databasen för exempelvis `buy` och `sell`. Jag hittade inget motsavrande i MONGODB.
+För routingen av mitt API valde jag att använda **Express**. Det är ett ramverk jag använt tidigare och verkar vara det överlägset populäraste. För att autensiera användare valde jag **jsonwebtoken**. Om rätt uppgifter anges och rätt env-variabel är satt returneras en token i form av en sträng. Användarnas lösenord krypteras med hjälp av **bcrypt** för att öka säkerheten ytterligare. Databasen valde jag att skapa i **MYSQL**. Jag kände att jag hade större kontroll där jämfört med **MONGODB**. MYSQL är bland annat striktare när det kommer till tabellers innehåll och har relationer mellan tabeller så man slipper duplicera data. För att hålla min javascript-kod renare och mer lättläst, skapade jag en del procedures i databasen för exempelvis `buy` och `sell`. Jag hittade inget motsvarande i MONGODB.
 
 
 
@@ -23,7 +23,7 @@ För routingen av mitt API valde jag att använda **Express**. Det är ett ramve
 
 I din README skriver du ett stycke om vilka verktyg du använt för din testsuite och om det är delar av applikationen som inte täcks av tester. Du reflekterar kort över hur dina teknikval fungerat för dig. Du reflekterar också över hur lätt/svårt det är att få kodtäckning på din applikation. -->
 
-För mina tester har jag använt **Mocha** och **Chai** som jag testat tidigare under kursen och tycker fungerar bra. Kodtäckningen sammanställs av **Istanbull** och dess cli **nyc**. Det var ganska enkelt att få kodtäckning över min kod. Jag gick uppifrån och ner och täckte upp de olika scenarierna. Hade jag haft mer tid hade jag kunnat nå högre täckning, men jag nöjde mig med 84%. För att kunna göra test som krävde inloggning använde jag en `before()` hook som återställer test-databasen och loggar in en användare.
+För mina tester har jag använt **Mocha** och **Chai** som jag testat tidigare under kursen och tycker fungerar bra. Kodtäckningen sammanställs av **Istanbul** och dess cli **nyc**. Det var ganska enkelt att få kodtäckning över min kod. Jag gick uppifrån och ner och täckte upp de olika scenarierna. Hade jag haft mer tid hade jag kunnat nå högre täckning, men jag nöjde mig med 84%. För att kunna göra test som krävde inloggning använde jag en `before()` hook som återställer test-databasen och loggar in en användare.
 
 För att se kodtäckningen lokalt i webbläsaren körs följande kommandon:
 ```
@@ -32,7 +32,7 @@ npm test
 open coverage/index.html
 ```
 
-För att automatisera mina tester använde jag byggtjänsten **Travis** som jag också använt tidigare. Kodens kvalitet och täckning analyseas av **Codacy**. De gav min kod betyget **B**, vilket jag tycker är rimligt. 
+För att automatisera mina tester använde jag byggtjänsten **Travis** som jag också använt tidigare. Kodens kvalitet och täckning analyseras av **Codacy**. De gav min kod betyget **B**, vilket jag tycker är rimligt.
 
 
 <!-- Man kan köra hela din testsuite lokalt via npm test.
