@@ -17,21 +17,22 @@ För routingen av mitt API valde jag att använda **Express**. Det är ett ramve
 
 
 
-# Tester backend
+### Tester backend
 
 <!-- Du har god kodtäckning i enhetstester och funktionstester på både backend och frontend. Sträva efter 70% där det är rimligt, men se det som en riktlinje och inte ett hårt krav.
 
 I din README skriver du ett stycke om vilka verktyg du använt för din testsuite och om det är delar av applikationen som inte täcks av tester. Du reflekterar kort över hur dina teknikval fungerat för dig. Du reflekterar också över hur lätt/svårt det är att få kodtäckning på din applikation. -->
 
-För mina tester har jag använt **Mocha** och **Chai** som jag testat tidigare under kursen och tycker fungerar bra. Kodtäckningen sammanställs av **Istanbull** och dess cli **nyc**. Det var ganska enkelt att få kodtäckning över min kod. Jag gick uppifrån och ner och täckte upp de olika scenarierna. Hade jag haft mer tid hade jag kunnat nå högre täckning, men jag nöjde mig med ... För att kunna göra test som krävde inloggning använde jag en `before()` hook som återställer test-databasen och loggar in en användare.
+För mina tester har jag använt **Mocha** och **Chai** som jag testat tidigare under kursen och tycker fungerar bra. Kodtäckningen sammanställs av **Istanbull** och dess cli **nyc**. Det var ganska enkelt att få kodtäckning över min kod. Jag gick uppifrån och ner och täckte upp de olika scenarierna. Hade jag haft mer tid hade jag kunnat nå högre täckning, men jag nöjde mig med 84%. För att kunna göra test som krävde inloggning använde jag en `before()` hook som återställer test-databasen och loggar in en användare.
 
 För att se kodtäckningen lokalt i webbläsaren körs följande kommandon:
 ```
+mysql -uroot -p**root password** < db/sql/setup_test.sql
 npm test
 open coverage/index.html
 ```
 
-För att automatisera mina tester använde jag byggtjänsten **Travis** som jag också använt tidigare. Kodens kvalitet och täckning analyseas av **Codacy**.
+För att automatisera mina tester använde jag byggtjänsten **Travis** som jag också använt tidigare. Kodens kvalitet och täckning analyseas av **Codacy**. De gav min kod betyget **B**, vilket jag tycker är rimligt. 
 
 
 <!-- Man kan köra hela din testsuite lokalt via npm test.
