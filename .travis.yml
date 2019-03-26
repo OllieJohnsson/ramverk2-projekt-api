@@ -12,9 +12,9 @@ before_script:
 
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS rv2projTest;'
-  - mysql -e 'GRANT ALL ON rv2projTest.* to MYSQL_USER@"localhost";'
-  - mysql -uMYSQL_USER rv2projTest < db/sql/ddl.sql
-  - mysql -uMYSQL_USER rv2projTest < db/sql/insert.sql
+  - mysql -e 'GRANT ALL ON rv2projTest.* to $MYSQL_USER@"localhost";'
+  - mysql -u$MYSQL_USER rv2projTest < db/sql/ddl.sql
+  - mysql -u$MYSQL_USER rv2projTest < db/sql/insert.sql
 
 script:
     - npm test
