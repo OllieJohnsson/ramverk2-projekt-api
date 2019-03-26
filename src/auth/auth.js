@@ -108,17 +108,12 @@ function displayToken(req, res) {
     const registerMessage = req.body.registerMessage;
 
     res.status(200).json({
-        message: registerMessage || `Loggade in ${username}`,
+        message: registerMessage || `Loggade in ${username}.`,
         token,
         userId
     });
 }
 
-function getUsers(req, res, next) {
-    db.query("select * from users", (err, rows) => {
-        res.json(rows);
-    })
-}
 
 module.exports = {
     register,
@@ -126,6 +121,5 @@ module.exports = {
     checkPassword,
     getToken,
     checkToken,
-    displayToken,
-    getUsers
+    displayToken
 };

@@ -1,5 +1,6 @@
 const express = require("express");
 const auth = require("../auth/auth");
+const user = require("../user/user");
 const objects = require("../objects/objects");
 const router = new express.Router();
 
@@ -23,7 +24,7 @@ router.get("/objects",
     (req, res, next) => objects.getAll(req, res, next)
 );
 
-router.get("/users", (req, res, next) => auth.getUsers(req, res, next));
+router.get("/users", (req, res, next) => user.getUsers(req, res, next));
 
 router.put("/updatePrice", (req, res, next) => objects.updatePrice(req, res, next));
 

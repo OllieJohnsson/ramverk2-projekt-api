@@ -5,7 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "start": "export NODE_ENV='development' && nodemon src/app.js",
-    "test": "export NODE_ENV='test' && nyc --reporter=html --reporter=text mocha --exit 'test/**/*.js'",
+    "test": "export NODE_ENV='test' && ./scripts/resetTestDB.bash && nyc --reporter=html --reporter=text mocha --exit 'test/**/*.js'",
     "report-codacy": "nyc report --reporter=text-lcov | codacy-coverage",
     "deployDB": "rsync -av ./db/sql oliver@debian:~/git/ramverk2-projekt-api/db/"
   },

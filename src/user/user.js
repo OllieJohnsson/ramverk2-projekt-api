@@ -10,7 +10,7 @@ function deposit(req, res, next) {
         return next({
             status: 500,
             title: "Missing values",
-            message: "You forgot to enter some values."
+            message: "Du glömde skriva in en summa."
         });
     }
 
@@ -18,7 +18,7 @@ function deposit(req, res, next) {
         return next({
             status: 500,
             title: "Invalid amount",
-            message: "The amount must be a positive number."
+            message: "Summan måste vara högre än 0."
         });
     }
 
@@ -95,6 +95,8 @@ function sell(req, res, next) {
         }
         if (rows[0][0].error) {
             return next({
+                status: 500,
+                title: "Not enough objects",
                 message: rows[0][0].error
             });
         }
@@ -104,11 +106,18 @@ function sell(req, res, next) {
     });
 }
 
+function getUsers(req, res, next) {
+    db.query("SELECT * FROM users", (err, rows) => {
+        res.json(rows);
+    })
+}
+
 
 module.exports = {
     deposit,
     buy,
     depot,
     boughtObjects,
-    sell
+    sell,
+    getUsers
 };

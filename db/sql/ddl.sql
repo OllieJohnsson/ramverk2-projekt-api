@@ -144,7 +144,7 @@ SET @myAmount = (SELECT SUM(p.amount) FROM `purchases` p WHERE `depotId` = @depo
 SET @totalValue = (`pAmount`*(SELECT `price` FROM `objects` WHERE `id` = `pObjectId`));
 
 IF `pAmount` > @myAmount OR @myAmount IS NULL THEN
-   SELECT "Du har inte så många objekt att sälja" AS `error`;
+   SELECT "Du har inte så många objekt att sälja." AS `error`;
 ELSE
 	INSERT INTO purchases (`depotId`, `objectId`, `amount`) VALUES (@depotId, `pObjectId`, -`pAmount`);
 	UPDATE objects SET `stock` = `stock` + `pAmount` WHERE `id` = `pObjectId`;
