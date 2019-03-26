@@ -1,4 +1,7 @@
 # ramverk2-projekt-api
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/10e576c1285b4c11a9d1934aae430221)](https://app.codacy.com/app/OllieJohnsson/ramverk2-projekt-api?utm_source=github.com&utm_medium=referral&utm_content=OllieJohnsson/ramverk2-projekt-api&utm_campaign=Badge_Grade_Dashboard)
+
 API för projektet i kursen ramverk2.
 
 
