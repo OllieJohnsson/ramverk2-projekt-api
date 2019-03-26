@@ -51,7 +51,7 @@ describe("Buy", () => {
     }
 
 
-    before('Prepare tables', (done) => {
+    before("Prepare tables", (done) => {
         deleteDepots().then((res) => {
             console.log(res);
             deleteUsers().then((res) => {
@@ -79,7 +79,7 @@ describe("Buy", () => {
         it(`500 should fail to deposit money and return message: "${failMessageNoValue}"`, (done) => {
             chai.request(server)
             .post("/user/deposit")
-            .set('x-access-token', user.token)
+            .set("x-access-token", user.token)
             .send({userId: user.id})
             .end((err, res) => {
                 if (err) {
@@ -95,7 +95,7 @@ describe("Buy", () => {
         it(`500 should fail to deposit money and return message: "${failMessageNegativeValue}"`, (done) => {
             chai.request(server)
             .post("/user/deposit")
-            .set('x-access-token', user.token)
+            .set("x-access-token", user.token)
             .send({userId: user.id, amount: -20})
             .end((err, res) => {
                 if (err) {
@@ -111,7 +111,7 @@ describe("Buy", () => {
         it(`200 should deposit 100 and return message: "${depositSuccessMessage}"`, (done) => {
             chai.request(server)
             .post("/user/deposit")
-            .set('x-access-token', user.token)
+            .set("x-access-token", user.token)
             .send({userId: user.id, amount: 100})
             .end((err, res) => {
                 if (err) {
@@ -127,7 +127,7 @@ describe("Buy", () => {
         it(`200 should buy 2 unit of coffee and return message: "${buySuccessMessage}"`, (done) => {
             chai.request(server)
             .post("/user/buy")
-            .set('x-access-token', user.token)
+            .set("x-access-token", user.token)
             .send({userId: user.id, objectId: 1, amount: 2})
             .end((err, res) => {
                 if (err) {
@@ -143,7 +143,7 @@ describe("Buy", () => {
         it(`500 should fail to sell 3 unit of coffee and return message: "${sellFailMessage}"`, (done) => {
             chai.request(server)
             .post("/user/sell")
-            .set('x-access-token', user.token)
+            .set("x-access-token", user.token)
             .send({userId: user.id, objectId: 1, amount: 3})
             .end((err, res) => {
                 if (err) {
@@ -159,7 +159,7 @@ describe("Buy", () => {
         it(`200 should sell 1 unit of coffee and return message: "${sellSuccessMessage}"`, (done) => {
             chai.request(server)
             .post("/user/sell")
-            .set('x-access-token', user.token)
+            .set("x-access-token", user.token)
             .send({userId: user.id, objectId: 1, amount: 1})
             .end((err, res) => {
                 if (err) {
@@ -176,7 +176,7 @@ describe("Buy", () => {
         it(`200 should return one object with name "${expectedName}" and value "${expectedValue}"`, (done) => {
             chai.request(server)
             .get(`/user/boughtObjects/${user.id}`)
-            .set('x-access-token', user.token)
+            .set("x-access-token", user.token)
             .end((err, res) => {
                 if (err) {
                     return console.log(err);
@@ -194,7 +194,7 @@ describe("Buy", () => {
         it(`200 should return an array containing one user with username: "${user.username}"`, (done) => {
             chai.request(server)
             .get(`/users`)
-            .set('x-access-token', user.token)
+            .set("x-access-token", user.token)
             .end((err, res) => {
                 if (err) {
                     return console.log(err);
@@ -209,7 +209,7 @@ describe("Buy", () => {
         it(`200 should return object with username that equals "${user.username}"`, (done) => {
             chai.request(server)
             .get(`/user/depot/${user.id}`)
-            .set('x-access-token', user.token)
+            .set("x-access-token", user.token)
             .end((err, res) => {
                 if (err) {
                     return console.log(err);

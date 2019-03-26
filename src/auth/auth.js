@@ -13,15 +13,15 @@ function register(req, res, next) {
 
     let hashedPassword = bcrypt.hashSync(password, salt);
 
-    const sql = "CALL register(?, ?, ?, ?, ?)"
+    const sql = "CALL register(?, ?, ?, ?, ?)";
     db.query(sql, [username, hashedPassword, email, firstName, lastName], (err, rows) => {
         if (err) {
             switch (err.sqlMessage) {
                 case `Duplicate entry \'${username}\' for key \'username\'`:
-                    err.message = `Användaren ${username} är redan registrerad.`
+                    err.message = `Användaren ${username} är redan registrerad.`;
                     break;
                 case `Duplicate entry \'${email}\' for key \'email\'`:
-                    err.message = `En användare med e-postadressen ${email} är redan registrerad.`
+                    err.message = `En användare med e-postadressen ${email} är redan registrerad.`;
                     break;
             }
             return next(err);
@@ -30,7 +30,7 @@ function register(req, res, next) {
         req.body.registerMessage = `Grattis ${username}! Du är nu registrerard.`;
         req.body.payload = {username};
         next();
-    })
+    });
 }
 
 

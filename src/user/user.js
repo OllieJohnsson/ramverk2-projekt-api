@@ -1,8 +1,6 @@
 const db = require("../../db/connection");
 
-
-
-function deposit(req, res, next) {
+function deposit(req, res, next) {
     const userId = req.body.userId;
     const amount = req.body.amount;
 
@@ -109,7 +107,7 @@ function sell(req, res, next) {
 function getUsers(req, res, next) {
     db.query("SELECT * FROM users", (err, rows) => {
         res.json(rows);
-    })
+    });
 }
 
 
