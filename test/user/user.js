@@ -214,7 +214,6 @@ describe("Buy", () => {
                 if (err) {
                     return console.log(err);
                 }
-                console.log(res.body);
                 res.should.have.status(200);
                 res.body.username.should.equal(user.username);
                 done();
