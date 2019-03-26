@@ -1,6 +1,6 @@
 {
   "name": "ramverk2-projekt-api",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "API for ramverk2 project",
   "main": "src/app.js",
   "scripts": {
