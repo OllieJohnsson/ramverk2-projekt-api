@@ -1,6 +1,7 @@
 # ramverk2-projekt-api
 API för projektet i kursen ramverk2.
 
+[![Build Status](https://travis-ci.org/OllieJohnsson/ramverk2-projekt-api.svg?branch=master)](https://travis-ci.org/OllieJohnsson/ramverk2-projekt-api)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0386893d17ad44daa207d388bb6440c5)](https://www.codacy.com/app/OllieJohnsson/ramverk2-projekt-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=OllieJohnsson/ramverk2-projekt-api&amp;utm_campaign=Badge_Grade)
 
@@ -30,7 +31,7 @@ npm test
 open coverage/index.html
 ```
 
-För att automatisera mina tester använde jag byggtjänsten **Travis** som jag också använt tidigare. Kodens kvalitet och täckning analyseas av  
+För att automatisera mina tester använde jag byggtjänsten **Travis** som jag också använt tidigare. Kodens kvalitet och täckning analyseas av **Codacy**.
 
 
 <!-- Man kan köra hela din testsuite lokalt via npm test.
