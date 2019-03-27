@@ -48,7 +48,7 @@ describe("Buy", () => {
                 resolve("registered user");
             });
         });
-    }
+    };
 
 
     before("Prepare tables", (done) => {
@@ -67,7 +67,7 @@ describe("Buy", () => {
                         done();
                     });
                 })
-            })
+            });
         });
     });
 
@@ -193,7 +193,7 @@ describe("Buy", () => {
 
         it(`200 should return an array containing one user with username: "${user.username}"`, (done) => {
             chai.request(server)
-            .get(`/users`)
+            .get("/users")
             .set("x-access-token", user.token)
             .end((err, res) => {
                 if (err) {

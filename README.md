@@ -7,17 +7,11 @@ API för projektet i kursen ramverk2.
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/0386893d17ad44daa207d388bb6440c5)](https://www.codacy.com/app/OllieJohnsson/ramverk2-projekt-api?utm_source=github.com&utm_medium=referral&utm_content=OllieJohnsson/ramverk2-projekt-api&utm_campaign=Badge_Coverage)
 
-
-
 <!-- Gör ett medvetet val av teknik och berätta utförligt i din README om vilka teknikval du har gjort och varför. -->
-
 
 För routingen av mitt API valde jag att använda **Express**. Det är ett ramverk jag använt tidigare och verkar vara det överlägset populäraste. För att autensiera användare valde jag **jsonwebtoken**. Om rätt uppgifter anges och rätt env-variabel är satt returneras en token i form av en sträng. Användarnas lösenord krypteras med hjälp av **bcrypt** för att öka säkerheten ytterligare. Databasen valde jag att skapa i **MYSQL**. Jag kände att jag hade större kontroll där jämfört med **MONGODB**. MYSQL är bland annat striktare när det kommer till tabellers innehåll och har relationer mellan tabeller så man slipper duplicera data. För att hålla min javascript-kod renare och mer lättläst, skapade jag en del procedures i databasen för exempelvis `buy` och `sell`. Jag hittade inget motsvarande i MONGODB.
 
-
-
-
-### Tester backend
+## Tester backend
 
 <!-- Du har god kodtäckning i enhetstester och funktionstester på både backend och frontend. Sträva efter 70% där det är rimligt, men se det som en riktlinje och inte ett hårt krav.
 
@@ -33,7 +27,6 @@ open coverage/index.html
 ```
 
 För att automatisera mina tester använde jag byggtjänsten **Travis** som jag också använt tidigare. Kodens kvalitet och täckning analyseras av **Codacy**. De gav min kod betyget **B**, vilket jag tycker är rimligt.
-
 
 <!-- Man kan köra hela din testsuite lokalt via npm test.
 
