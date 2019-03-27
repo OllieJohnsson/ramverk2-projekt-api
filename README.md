@@ -26,7 +26,7 @@ npm test
 open coverage/index.html
 ```
 
-För att automatisera mina tester använde jag byggtjänsten **Travis** som jag också använt tidigare. Kodens kvalitet och täckning analyseras av **Codacy**. De gav min kod betyget **B**, vilket jag tycker är rimligt.
+För att automatisera mina tester använde jag byggtjänsten **Travis** som jag också använt tidigare. Kodens kvalitet och täckning analyseras av **Codacy**. De gav min kod betyget **A**, vilket jag tycker är rimligt.
 
 <!-- Man kan köra hela din testsuite lokalt via npm test.
 

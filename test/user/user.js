@@ -66,7 +66,7 @@ describe("Buy", () => {
                         user.token = res.body.token;
                         done();
                     });
-                })
+                });
             });
         });
     });
